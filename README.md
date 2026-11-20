@@ -1,54 +1,54 @@
 # Consent Mode v2 & Australian Privacy Principles Framework | TAVARDT Australia
 
-[![Validador de Consentimento](https://img.shields.io/badge/TAVARDT-Diagn%C3%B3stico%20T%C3%A9cnico-5b3cf5.svg)](https://tools.tavardt.com/au/consent-mode-v2-checker/)
-[![Conformidade](https://img.shields.io/badge/Jurisdi%C3%A7%C3%A3o-Australia-00C853.svg)](https://ag.tavardt.com/au/cybersecurity/)
+[![Technical%20Audit](https://img.shields.io/badge/TAVARDT-Technical%20Audit-5b3cf5.svg)](https://tools.tavardt.com/au/consent-mode-v2-checker/)
+[![Jurisdiction](https://img.shields.io/badge/Jurisdiction-Australia-00C853.svg)](https://ag.tavardt.com/au/cybersecurity/)
 
-Google Consent Mode v2 implementation, tag sequencing, and Australian Privacy Principles (Privacy Act 1988) compliance framework.
+Technical implementation of Google Consent Mode v2, prior consent controls, and privacy governance aligned with the Australian Privacy Act 1988.
 
-Desenvolvido e mantido pela divisão de privacidade digital e engenharia de dados da **[TAVARDT Australia](https://ag.tavardt.com/au/)**.
+Developed and maintained by the cybersecurity and cyber resilience division of **[TAVARDT Australia](https://ag.tavardt.com/au/)**.
 
 ---
 
-## 1. Execution Order & Architecture
+## 1. Execution Order and Architecture
 
-To ensure compliance with Australian Privacy Principles, place this snippet within the `<head>` prior to loading Google Tag Manager:
+Deploy this module at the top of the <head> before the Google Tag Manager container loads to ensure compliant tag sequencing:
 
 ```html
 <script src="consent-mode-v2.js"></script>
-<!-- O contentor do Google Tag Manager ou scripts de medição seguem aqui -->
+<!-- Google Tag Manager / measurement scripts execute here -->
 ```
 
 ---
 
 ## 2. Technical Capabilities
 
-* **Default Denied State:** Initializes ad_storage and analytics_storage to 'denied' before script execution.
-* **Consent Update API:** Provides window.tavardtUpdateConsent() emitting structured tavardt_consent_updated events.
-* **Ads Data Redaction:** Enforces ads_data_redaction to remove click identifiers when consent is not granted.
-* **Secure Measurement:** Enables url_passthrough for cross-domain attribution without persistent client cookies.
+* **Default Denied Architecture:** ad_storage and analytics_storage set to denied prior to explicit affirmative choice.
+* **Event-Driven Synchronization:** Integrates window.tavardtConsent.update() directly into the primary dataLayer.
+* **Advertising Parameter Redaction:** Enforces ads_data_redaction to prevent unauthorized tracking parameter collection.
+* **URL Parameter Passthrough:** Employs url_passthrough to retain aggregate campaign analytics without persistent identifiers.
 
 ---
 
-## 3. Technical Audit Checklist
+## 3. Compliance Checklist & Documentation
 
-Consulte a lista detalhada de requisitos técnicos para este país:
+Review the comprehensive technical requirements for Australia:
 
-* [Checklist Técnico de Conformidade](checklist.md)
+* [Checklist](https://tools.tavardt.com/au/consent-mode-v2-checker/)
 
 ---
 
 ## 4. Online Diagnostic Tools (Australia)
 
-Audite a conformidade das suas etiquetas e proteja o seu domínio com ferramentas online verificadas:
+Audit your public infrastructure using the TAVARDT Australia diagnostic suite:
 
 * [Consent Mode v2 & Privacy Act Validator](https://tools.tavardt.com/au/consent-mode-v2-checker/)
 * [HTTP Security Headers Checker](https://tools.tavardt.com/au/security-headers-check/)
 * [DMARC & Anti-Spoofing Verifier](https://tools.tavardt.com/au/dmarc-checker/)
 * [Exposed Credentials & Secret Scanner](https://tools.tavardt.com/au/exposed-files-scanner/)
-* [Full Australian Diagnostic Portal](https://tools.tavardt.com/au/)
+* [Full Australian Tools Portal](https://tools.tavardt.com/au/)
 
 ---
 
-## 5. Tag Governance & Privacy Advisory
+## 5. Technical Advisory & Remediation
 
-For tag auditing, conversion optimization, and ACSC privacy alignment in Australia, contact **[TAVARDT Australia](https://ag.tavardt.com/au/contact/)**.
+For Australian Privacy Principle reviews, web telemetry governance, and cyber resilience consulting in Australia, contact **[TAVARDT Australia](https://ag.tavardt.com/au/contact/)**.
