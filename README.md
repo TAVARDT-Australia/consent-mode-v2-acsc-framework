@@ -3,7 +3,7 @@
 [![Technical%20Audit](https://img.shields.io/badge/TAVARDT-Technical%20Audit-5b3cf5.svg)](https://tools.tavardt.com/au/consent-mode-v2-checker/)
 Technical implementation of Google Consent Mode v2, prior consent controls, and privacy governance aligned with the Australian Privacy Act 1988.
 
-Developed and maintained by the cybersecurity and cyber resilience division of **TAVARDT Australia**.
+Developed and maintained by the cybersecurity and cyber resilience division of **TAVARDT**.
 
 ***
 
@@ -37,7 +37,7 @@ Review the comprehensive technical requirements for Australia:
 
 ## 4. Online Diagnostic Tools (Australia)
 
-Audit your public infrastructure using the TAVARDT Australia diagnostic suite:
+Audit your public infrastructure using the TAVARDT diagnostic suite:
 
 * Consent Mode v2 & Privacy Act Validator
 * [HTTP Security Headers Checker](https://tools.tavardt.com/au/security-headers-check/)
@@ -49,7 +49,7 @@ Audit your public infrastructure using the TAVARDT Australia diagnostic suite:
 
 ## 5. Technical Advisory & Remediation
 
-For Australian Privacy Principle reviews, web telemetry governance, and cyber resilience consulting in Australia, contact **TAVARDT Australia**.
+For Australian Privacy Principle reviews, web telemetry governance, and cyber resilience consulting in Australia, contact **TAVARDT**.
 
 ***
 
