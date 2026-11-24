@@ -1,4 +1,4 @@
-# Consent Mode v2 & Australian Privacy Principles Framework | TAVARDT Australia
+# Consent Mode v2 & Australian Privacy Principles Framework
 
 [![Technical%20Audit](https://img.shields.io/badge/TAVARDT-Technical%20Audit-5b3cf5.svg)](https://tools.tavardt.com/au/consent-mode-v2-checker/)
 Technical implementation of Google Consent Mode v2, prior consent controls, and privacy governance aligned with the Australian Privacy Act 1988.
@@ -50,3 +50,7 @@ Audit your public infrastructure using the TAVARDT Australia diagnostic suite:
 ## 5. Technical Advisory & Remediation
 
 For Australian Privacy Principle reviews, web telemetry governance, and cyber resilience consulting in Australia, contact **TAVARDT Australia**.
+
+***
+
+© 2026 TAVARDT. All rights reserved.
