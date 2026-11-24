@@ -53,4 +53,12 @@ For Australian Privacy Principle reviews, web telemetry governance, and cyber re
 
 ***
 
+## Useful Links
+
+* **Corporate Portal:** https://ag.tavardt.com/au/
+* **Diagnostic Suite:** https://tools.tavardt.com/au/
+* **Technical Contact:** https://ag.tavardt.com/au/contact/
+
+***
+
 © 2026 TAVARDT. All rights reserved.
