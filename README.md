@@ -129,7 +129,6 @@ Audit your public infrastructure using the TAVARDT diagnostic suite:
 * [HTTP Security Headers Checker](https://tools.tavardt.com/au/security-headers-check/)
 * [DMARC & Anti-Spoofing Verifier](https://tools.tavardt.com/au/dmarc-checker/)
 * [Exposed Credentials & Secret Scanner](https://tools.tavardt.com/au/exposed-files-scanner/)
-* [Full Australian Tools Portal](https://tools.tavardt.com/au/)
 
 ***
 
