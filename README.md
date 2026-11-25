@@ -1,97 +1,50 @@
-# Consent Mode v2 & Australian Privacy Principles Framework
+# Consent Mode v2 & Privacy Act Technical Compliance Framework
 
 [![Technical Audit](https://img.shields.io/badge/TAVARDT-Technical%20Audit-5b3cf5.svg)](https://tools.tavardt.com/au/consent-mode-v2-checker/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-Node.js-yellow.svg)](https://nodejs.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-Technical implementation of Google Consent Mode v2, prior consent controls, and privacy governance aligned with the Australian Privacy Act 1988 and ACSC guidelines.
+***
 
-Engineered and maintained by the cyber defence and privacy engineering practice at **TAVARDT** for Australian digital infrastructure.
+Production-ready technical implementation of Google Consent Mode v2, script pre-execution gating, and privacy regulation compliance engineered by **TAVARDT**, aligned with Australian Privacy Principles (Privacy Act 1988) and ACSC Essential Eight baseline controls.
+
+To maintain strict regulatory compliance, inject the initialization script into the document `<head>` strictly prior to loading Google Tag Manager or measurement libraries. Early execution establishes default denied states before tracking pixels can write storage or transmit user identifiers.
 
 ***
 
-## 1. Execution Order and Architecture
+## Core Capabilities and Defensive Architecture
 
-Deploy this module at the top of the `<head>` section before the Google Tag Manager container loads. Proper tag sequencing guarantees that all measurement scripts respect default consent configurations before executing network requests:
+* **Enforced Default Denied State**: Immediately sets `ad_storage`, `ad_user_data`, `ad_personalization`, and `analytics_storage` to denied before third-party tags parse.
+* **Event-Driven Update API**: Provides the global `window.tavardtUpdateConsent` function to synchronize user choices from any CMP directly into the `dataLayer`.
+* **Automatic Ad Identifier Redaction**: Enforces `ads_data_redaction` to strip GCLID and query parameters from network requests when advertising consent is withheld.
+* **Cookieless Attribution Passthrough**: Activates `url_passthrough` to allow anonymous measurement across site pages without persistent local storage.
+* **Zero Framework Overhead**: Implemented in clean, dependency-free vanilla JavaScript (`consent-mode-v2.js`) executing in under 1ms.
+
+***
+
+## Threat Vectors and Operational Impact
+
+Deploying analytics and marketing tags without deterministic consent gating exposes digital properties to regulatory penalties and tracking discrepancies. The framework mitigates four core operational risks:
+
+* **Unconsented Tracking Pixel Firing**: Marketing scripts writing cookies prior to user opt-in, triggering statutory privacy violations and regulatory fines.
+* **Conversion Modeling Data Disconnect**: Incomplete Consent Mode v2 signals resulting in lost attribution data across Google Ads and Google Analytics 4.
+* **Ad Click Identifier Exfiltration**: Accidental transmission of user tracking parameters across unconsented advertising network requests.
+* **Tag Sequencing Race Conditions**: Third-party measurement tags executing before CMP scripts can register consent states.
+
+***
+
+## Implementation and Integration Guide
+
+Embed the pre-execution script at the highest point of your document `<head>` before any analytics containers:
 
 ```html
 <script src="consent-mode-v2.js"></script>
 ```
 
-Load Google Tag Manager or measurement scripts immediately after this inclusion to ensure privacy signals are active.
-
-***
-
-## 2. Technical Capabilities
-
-* **Default Denied Architecture:** Enforces `denied` state for advertising and analytics cookies prior to explicit affirmative choice.
-* **Event-Driven Synchronization:** Exposes `window.tavardtUpdateConsent()` to synchronize user choices with downstream analytics tags.
-* **Advertising Parameter Redaction:** Activates `ads_data_redaction` to strip click identifiers when advertising storage is declined.
-* **URL Parameter Passthrough:** Utilizes `url_passthrough` to retain campaign attribution without persistent client-side tracking cookies.
-* **Granular Preference Mapping:** Maps individual marketing, analytics, and preference categories to official Google consent signals.
-* **Zero External Dependencies:** Built with vanilla JavaScript to ensure rapid execution and zero external network overhead.
-
-***
-
-## 3. Consent Signals & Telemetry Matrix
-
-<table>
-  <thead>
-    <tr>
-      <th>Consent Parameter</th>
-      <th>Telemetry & Storage Scope</th>
-      <th>Default Baseline</th>
-      <th>Post-Consent State</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>ad_storage</strong></td>
-      <td>Controls cookie storage related to advertising</td>
-      <td><code>denied</code></td>
-      <td><code>granted</code> upon marketing opt-in</td>
-    </tr>
-    <tr>
-      <td><strong>ad_user_data</strong></td>
-      <td>Governs transmission of user data to advertising platforms</td>
-      <td><code>denied</code></td>
-      <td><code>granted</code> upon marketing opt-in</td>
-    </tr>
-    <tr>
-      <td><strong>ad_personalization</strong></td>
-      <td>Enables remarketing and personalized ad audiences</td>
-      <td><code>denied</code></td>
-      <td><code>granted</code> upon marketing opt-in</td>
-    </tr>
-    <tr>
-      <td><strong>analytics_storage</strong></td>
-      <td>Permits cookie storage for visitor behavior analytics</td>
-      <td><code>denied</code></td>
-      <td><code>granted</code> upon analytics opt-in</td>
-    </tr>
-    <tr>
-      <td><strong>functionality_storage</strong></td>
-      <td>Enables essential website features such as language settings</td>
-      <td><code>granted</code></td>
-      <td><code>granted</code> (strictly necessary)</td>
-    </tr>
-    <tr>
-      <td><strong>security_storage</strong></td>
-      <td>Supports authentication, fraud prevention, and session security</td>
-      <td><code>granted</code></td>
-      <td><code>granted</code> (strictly necessary)</td>
-    </tr>
-  </tbody>
-</table>
-
-***
-
-## 4. Event-Driven Consent Update Integration
-
-When a user updates their preferences through a consent banner or preference modal, invoke `window.tavardtUpdateConsent()` with boolean parameters:
+### Script Execution Snippet
 
 ```javascript
-// Triggered by your Consent Management Platform (CMP) or banner interaction
+// Programmatic consent update triggered by CMP callback
 window.tavardtUpdateConsent({
     marketing: true,
     analytics: true,
@@ -99,42 +52,29 @@ window.tavardtUpdateConsent({
 });
 ```
 
-This updates internal gtag consent signals and immediately dispatches a `tavardt_consent_updated` custom event to `dataLayer` to unblock authorized marketing and analytics tags.
-
 ***
 
-## 5. Frequently Asked Questions (Technical FAQ)
+## Frequently Asked Technical Questions
 
-### 1. Why is prior consent enforcement required before Google Tag Manager container initialization?
-Under Australian Privacy Principles (APPs 1 and 5) and Google Consent Mode v2 standards, tracking tags must not write or read identifiers before consent is registered. Loading the consent configuration script before Google Tag Manager ensures default denied signals govern all subsequently dispatched measurement tags.
+### What specific consent signals does Google Consent Mode v2 enforce for privacy compliance?
 
-### 2. What is the specific function of the ad_user_data and ad_personalization signals in Consent Mode v2?
-These two signals control whether user-provided data and behavioural cookies can be utilized for audience building and remarketing campaigns. When set to denied, ad platforms receive aggregate pings lacking personal identifiers, preserving measurement without cross-site tracking.
+Consent Mode v2 introduces ad_user_data and ad_personalization alongside traditional ad_storage and analytics_storage parameters. These granular signals govern whether user data can be dispatched to advertising platforms for modeling, remarketing, and conversion tracking under global privacy frameworks.
 
-### 3. How does ads_data_redaction safeguard Australian user privacy?
-When ads_data_redaction is activated, ad click identifiers such as GCLID or DCLID are stripped from network request URLs whenever ad_storage is denied. This mechanism prevents ad networks from correlating user sessions with previous ad exposures while consent is withheld.
+### Why must default consent states be registered prior to loading Google Tag Manager or measurement tags?
 
-### 4. What technical advantage does url_passthrough provide for campaign attribution?
-The url_passthrough setting allows campaign landing parameters to pass between internal site pages via query strings rather than persistent cookies. This maintains aggregated conversion path tracking across a single session without writing third-party storage to the visitor device.
+Setting default states to denied before tag management scripts execute guarantees that no marketing cookies or identifiers are written upon initial page load. Any measurement script firing prematurely without prior consent violates privacy regulations and invalidates downstream signal compliance.
 
-### 5. How does the event-driven synchronization model notify downstream tags in GTM?
-Calling `window.tavardtUpdateConsent(preferences)` pushes a `tavardt_consent_updated` custom event to `dataLayer` alongside the updated signal dictionary. Tag management triggers listening to this event fire analytics or advertising scripts instantaneously once affirmative consent is received.
+### How does ads_data_redaction protect user privacy while preserving conversion attribution?
 
-***
+Enabling ads_data_redaction strips advertising click identifiers such as GCLID and DCLID from network requests whenever ad storage consent is denied. When combined with url_passthrough, the framework routes anonymized pings across pages, enabling statistical conversion modeling without persistent device tracking.
 
-## 6. Online Diagnostic Tools (Australia)
+### How does the framework synchronize user banner selections with downstream analytics tags?
 
-Audit your public infrastructure using the TAVARDT diagnostic suite:
+The window.tavardtUpdateConsent function receives user preferences from the Consent Management Platform and invokes gtag consent update to broadcast new states to the dataLayer. Tag firing rules in Google Tag Manager listening to consent updates dynamically unlock appropriate marketing or analytics scripts in real time.
 
-* [HTTP Security Headers Checker](https://tools.tavardt.com/au/security-headers-check/)
-* [DMARC & Anti-Spoofing Verifier](https://tools.tavardt.com/au/dmarc-checker/)
-* [Exposed Credentials & Secret Scanner](https://tools.tavardt.com/au/exposed-files-scanner/)
+### How can engineering teams verify that tags adhere to Consent Mode v2 without data leakage?
 
-***
-
-## 7. Technical Advisory & Privacy Governance in Australia
-
-For Australian Privacy Principle reviews, web telemetry governance, and cyber resilience consulting in Sydney, Melbourne, Brisbane, or Perth, contact **TAVARDT**.
+Teams can inspect browser network calls using developer tools to verify that outgoing collection pings contain the gcs and gcd consent status query parameters. Automated validation pipelines confirm that ad pixels remain blocked until explicit opt-in signals update the dataLayer.
 
 ***
 
@@ -147,7 +87,7 @@ For Australian Privacy Principle reviews, web telemetry governance, and cyber re
 ***
 
 ### License
-Released under the MIT License.
+Released under the MIT License. See [LICENSE](LICENSE) for full details.
 
 ***
 
