@@ -1,12 +1,10 @@
 # Consent Mode v2 & Australian Privacy Principles Framework
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Technical Audit](https://img.shields.io/badge/TAVARDT-Technical%20Audit-5b3cf5.svg)](https://tools.tavardt.com/au/consent-mode-v2-checker/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-Node.js-yellow.svg)](https://nodejs.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 Technical implementation of Google Consent Mode v2, prior consent controls, and privacy governance aligned with the Australian Privacy Act 1988.
-
-Developed and maintained by the cybersecurity and cyber resilience division of **TAVARDT**.
 
 ***
 
@@ -42,7 +40,6 @@ Review the comprehensive technical requirements for Australia:
 
 Audit your public infrastructure using the TAVARDT diagnostic suite:
 
-* Consent Mode v2 & Privacy Act Validator
 * [HTTP Security Headers Checker](https://tools.tavardt.com/au/security-headers-check/)
 * [DMARC & Anti-Spoofing Verifier](https://tools.tavardt.com/au/dmarc-checker/)
 * [Exposed Credentials & Secret Scanner](https://tools.tavardt.com/au/exposed-files-scanner/)
@@ -65,7 +62,7 @@ For Australian Privacy Principle reviews, web telemetry governance, and cyber re
 ***
 
 ### License
-Released under the MIT License. See [LICENSE](LICENSE) for full details.
+Released under the MIT License.
 
 ***
 
